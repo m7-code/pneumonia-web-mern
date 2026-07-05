@@ -4,10 +4,10 @@ import Navbar from '../components/Navbar';
 import StatCard from '../components/StatCard';
 import AssistantCard from '../components/AssistantCard';
 
-export default function Home({ user }) {
+export default function Home({ user , onLogout }) {
   return (
     <div className="min-h-screen">
-      <Navbar user={user} />
+      <Navbar user={user} onLogout={onLogout} />
 
       <main className="mx-auto max-w-7xl px-5 md:px-8 pt-10 pb-16">
         {/* Greeting */}
@@ -57,13 +57,13 @@ export default function Home({ user }) {
           {/* CENTER: Lung image */}
 <div className="relative order-1 md:order-2 flex items-center justify-center min-h-[380px]">
   <div className="absolute inset-0 bg-gradient-radial from-primary/10 to-transparent rounded-full blur-3xl" />
-  <div className="relative w-64 md:w-80">
-    <img
-      src="/lung1.png"
-      alt="Lung illustration"
-      className="w-full h-auto drop-shadow-[0_20px_40px_rgba(232,97,90,0.35)]"
-    />
-  </div>
+  <div className="relative w-80 md:w-[26rem]">
+  <img
+    src="/lung1.png"
+    alt="Lung illustration"
+    className="w-full h-auto drop-shadow-[0_20px_40px_rgba(232,97,90,0.35)]"
+  />
+</div>
             {/* Floating connector labels - absolute positioned */}
             <div className="hidden md:block absolute left-2 top-[42%] rounded-2xl bg-white/90 dark:bg-white/10 backdrop-blur-xl px-4 py-2.5 shadow-lg text-xs">
               <div className="text-muted">Oxygen Saturation</div>

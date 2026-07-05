@@ -18,12 +18,12 @@
 
 body {
   font-family: var(--font-body);
-  background: linear-gradient(135deg, #EEECFB 0%, #F8F6FF 50%, #F3EEFC 100%);
+  background: linear-gradient(135deg, #b0ccec 0%, #F5F9FF 50%, #a3bbeb 100%);
   min-height: 100vh;
 }
 
 .dark body {
-  background: linear-gradient(135deg, #17152A 0%, #1D1A33 100%);
+  background: linear-gradient(135deg, #2d2a4b 0%, #24213d 100%);
 }
 
 /* Toggle switch - exact design jo diya gaya */
