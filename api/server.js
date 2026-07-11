@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { connectDB } from './lib/db.js';
 import authRoutes from './routes/auth.js';
 import resultsRoutes from './routes/results.js';
+import chatRoutes from './routes/chat.js';
 // import dns from 'dns';
 
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/results', resultsRoutes);
+app.use('/api', chatRoutes);
 
 connectDB();
 

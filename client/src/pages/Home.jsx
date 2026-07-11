@@ -90,7 +90,7 @@ export default function Home({ user , onLogout }) {
               </svg>
             </StatCard>
 
-            <AssistantCard />
+            <AssistantCard userName={user?.name} />
           </div>
         </div>
 

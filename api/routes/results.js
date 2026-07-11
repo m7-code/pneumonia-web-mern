@@ -9,7 +9,7 @@ const router = express.Router();
 // Memory storage - file disk pe save nahi hoti, seedha FastAPI ko forward hoti hai
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB - Laravel wali limit jaisa
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB - limit
 });
 
 router.post('/analyze', protect, upload.single('xray_image'), async (req, res) => {
@@ -37,7 +37,7 @@ router.post('/analyze', protect, upload.single('xray_image'), async (req, res) =
 
     const response = await axios.post(`${fastApiUrl}/predict`, formData, {
       headers: formData.getHeaders(),
-      timeout: 120000, // 2 minute - Laravel wali timeout jaisa
+      timeout: 120000, // 2 minute -  timeout 
     });
 
     res.json({ success: true, data: response.data });
