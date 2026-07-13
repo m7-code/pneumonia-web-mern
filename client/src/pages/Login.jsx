@@ -2,6 +2,23 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthCard from '../components/AuthCard';
+import FormInput from '../components/FormInput';
+
+// Icons - reference design ke SVG jaise hi
+const MailIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+    <rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" strokeWidth="2" />
+    <path d="M2 8l10 6 10-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+const LockIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+    <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="2" />
+    <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <circle cx="12" cy="16" r="1.5" fill="currentColor" />
+  </svg>
+);
 
 export default function Login({ onAuthSuccess }) {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -29,52 +46,44 @@ export default function Login({ onAuthSuccess }) {
   }
 
   return (
-    <AuthCard
-      title="Welcome back"
-      subtitle="Log in to continue to PneumoFusion"
-      footerText="Don't have an account?"
-      footerLinkText="Sign up"
-      footerLinkTo="/register"
-    >
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <AuthCard footerText="Don't have an account?" footerLinkText="Register" footerLinkTo="/register" title="Login">
+      <form onSubmit={handleSubmit}>
         {error && (
-          <div className="rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-400 text-sm px-4 py-2.5">
+          <div className="rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-2.5 mb-5">
             {error}
           </div>
         )}
 
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium text-ink dark:text-white">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-            placeholder="you@example.com"
-            className="rounded-xl bg-black/[0.03] dark:bg-white/5 border border-black/5 dark:border-white/10 px-4 py-3 text-sm text-ink dark:text-white outline-none focus:border-primary transition-colors"
-          />
-        </div>
+        <FormInput
+          type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          required
+          placeholder="Email"
+          icon={<MailIcon />}
+        />
 
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium text-ink dark:text-white">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            required
-            placeholder="••••••••"
-            className="rounded-xl bg-black/[0.03] dark:bg-white/5 border border-black/5 dark:border-white/10 px-4 py-3 text-sm text-ink dark:text-white outline-none focus:border-primary transition-colors"
-          />
-        </div>
+        <FormInput
+          type="password"
+          name="password"
+          value={form.password}
+          onChange={handleChange}
+          required
+          placeholder="Password"
+          icon={<LockIcon />}
+        />
 
         <button
           type="submit"
           disabled={loading}
-          className="mt-2 rounded-full bg-primary text-white font-medium py-3 hover:bg-primary-dark transition-colors disabled:opacity-50"
+          className="w-full py-4 mt-2 rounded-full text-white font-semibold text-sm uppercase tracking-wider transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:translate-y-0"
+          style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            boxShadow: '0 5px 20px rgba(102, 126, 234, 0.4)',
+          }}
         >
-          {loading ? 'Logging in...' : 'Log in'}
+          {loading ? 'Logging in...' : 'Login'}
         </button>
       </form>
     </AuthCard>

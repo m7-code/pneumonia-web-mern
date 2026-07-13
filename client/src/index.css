@@ -18,7 +18,7 @@
 
 body {
   font-family: var(--font-body);
-  background: linear-gradient(135deg, #eaedee 0%, #c7e5ee 50%, #d9e6eb 100%);
+  background: linear-gradient(135deg, #beaee8 0%, #ffffff 50%, #beaee8 100%);
   min-height: 100vh;
 }
 

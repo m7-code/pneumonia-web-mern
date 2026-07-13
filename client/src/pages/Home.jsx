@@ -14,7 +14,7 @@ export default function Home({ user, onLogout }) {
           <span className="inline-block rounded-full bg-primary text-white text-xs font-semibold px-4 py-1.5 mb-3">
             AI Smarter
           </span>
-          <h1 className="font-display text-3xl md:text-[2.75rem] font-bold text-ink dark:text-white leading-tight">
+          <h1 className="font-display text-3xl md:text-[2.75rem] font-bold text-ink leading-tight">
             Lung Health, Read by AI
           </h1>
           <p className="text-muted mt-2 max-w-md">
@@ -26,28 +26,34 @@ export default function Home({ user, onLogout }) {
           {/* LEFT COLUMN */}
           <div className="flex flex-col gap-5 order-2 md:order-1 h-full">
             <StatCard icon="◎" label="AI Detection Confidence" value="—" unit="replace with real score">
-              <div className="mt-3 h-2 rounded-full bg-black/5 dark:bg-white/10 overflow-hidden">
-                <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-primary to-primary-dark" />
-              </div>
-              <div className="flex justify-between text-[10px] text-muted mt-1">
-                <span>0%</span><span>100%</span>
-              </div>
-            </StatCard>
+  <div className="mt-3 h-2 rounded-full bg-black/5 overflow-hidden">
+    <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-primary to-primary-dark" />
+  </div>
+  <div className="flex justify-between text-[10px] text-muted mt-1">
+    <span>0%</span><span>100%</span>
+  </div>
+</StatCard>
 
-            <StatCard icon="▤" label="Weekly Scans Analyzed" value="—" unit="connect to your data">
-              <div className="flex items-end gap-1.5 h-16 mt-3">
-                {[40, 65, 30, 80, 55, 90, 45].map((h, i) => (
-                  <div key={i} className="flex-1 rounded-t-md bg-primary/70" style={{ height: `${h}%` }} />
-                ))}
-              </div>
-              <div className="flex justify-between text-[10px] text-muted mt-1">
-                {['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map((d) => <span key={d}>{d}</span>)}
-              </div>
-            </StatCard>
+<StatCard icon="▤" label="Weekly Scans Analyzed" value="—" unit="connect to your data">
+  <div className="flex items-end gap-1.5 h-16 mt-3">
+    {[40, 65, 30, 80, 55, 90, 45].map((h, i) => (
+      <div key={i} className="flex-1 rounded-t-md bg-primary/70" style={{ height: `${h}%` }} />
+    ))}
+  </div>
+  <div className="flex justify-between text-[10px] text-muted mt-1">
+    {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
+      <span key={d}>{d}</span>
+    ))}
+  </div>
+</StatCard>
 
             <Link
               to={user ? '/results' : '/register'}
-              className="mt-2 rounded-full bg-primary text-white text-center font-medium px-6 py-3.5 hover:bg-primary-dark transition-colors"
+              className="mt-2 rounded-full text-white text-center font-semibold text-sm uppercase tracking-wider px-6 py-4 transition-transform hover:-translate-y-0.5"
+              style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                boxShadow: '0 5px 20px rgba(102, 126, 234, 0.4)',
+              }}
             >
               Analyze a scan →
             </Link>
@@ -64,18 +70,18 @@ export default function Home({ user, onLogout }) {
               />
             </div>
 
-            {/* Floating connector labels - absolute positioned */}
-            <div className="hidden md:block absolute left-2 top-[42%] rounded-2xl bg-white/90 dark:bg-white/10 backdrop-blur-xl px-4 py-2.5 shadow-lg text-xs">
+            {/* Floating connector labels */}
+            <div className="hidden md:block absolute left-2 top-[42%] rounded-2xl bg-white/85 backdrop-blur-xl border border-black/[0.06] px-4 py-2.5 shadow-lg text-xs">
               <div className="text-muted">Oxygen Saturation</div>
-              <div className="text-ink dark:text-white font-semibold">— %</div>
+              <div className="text-ink font-semibold">— %</div>
             </div>
-            <div className="hidden md:block absolute right-2 top-[55%] rounded-2xl bg-white/90 dark:bg-white/10 backdrop-blur-xl px-4 py-2.5 shadow-lg text-xs">
+            <div className="hidden md:block absolute right-2 top-[55%] rounded-2xl bg-white/85 backdrop-blur-xl border border-black/[0.06] px-4 py-2.5 shadow-lg text-xs">
               <div className="text-muted">Respiratory Rate</div>
-              <div className="text-ink dark:text-white font-semibold">— /min</div>
+              <div className="text-ink font-semibold">— /min</div>
             </div>
-            <div className="hidden md:block absolute left-1/2 -translate-x-1/2 bottom-0 rounded-2xl bg-white/90 dark:bg-white/10 backdrop-blur-xl px-4 py-2.5 shadow-lg text-xs">
+            <div className="hidden md:block absolute left-1/2 -translate-x-1/2 bottom-0 rounded-2xl bg-white/85 backdrop-blur-xl border border-black/[0.06] px-4 py-2.5 shadow-lg text-xs">
               <div className="text-muted">Airway Clarity</div>
-              <div className="text-ink dark:text-white font-semibold">Normal</div>
+              <div className="text-ink font-semibold">Normal</div>
             </div>
           </div>
 
