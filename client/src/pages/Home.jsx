@@ -3,6 +3,23 @@ import Navbar from '../components/Navbar';
 import StatCard from '../components/StatCard';
 import AssistantCard from '../components/AssistantCard';
 
+// Icons - StatCard headers ke liye, overall design ke sath consistent stroke style
+const TargetIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
+    <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" />
+    <circle cx="12" cy="12" r="1" fill="currentColor" />
+  </svg>
+);
+
+const ChartIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+    <rect x="4" y="12" width="4" height="8" rx="1" stroke="currentColor" strokeWidth="2" />
+    <rect x="10" y="7" width="4" height="13" rx="1" stroke="currentColor" strokeWidth="2" />
+    <rect x="16" y="3" width="4" height="17" rx="1" stroke="currentColor" strokeWidth="2" />
+  </svg>
+);
+
 export default function Home({ user, onLogout }) {
   return (
     <div className="min-h-screen">
@@ -14,7 +31,7 @@ export default function Home({ user, onLogout }) {
           <span className="inline-block rounded-full bg-primary text-white text-xs font-semibold px-4 py-1.5 mb-3">
             AI Smarter
           </span>
-         <h1 className="font-display text-3xl md:text-[2.75rem] font-bold text-ink dark:text-white leading-tight">
+          <h1 className="font-display text-3xl md:text-[2.75rem] font-bold text-ink dark:text-white leading-tight">
             Lung Health, Read by AI
           </h1>
           <p className="text-muted mt-2 max-w-md">
@@ -25,27 +42,28 @@ export default function Home({ user, onLogout }) {
         <div className="grid md:grid-cols-[280px_1fr_300px] gap-6">
           {/* LEFT COLUMN */}
           <div className="flex flex-col gap-5 order-2 md:order-1 h-full">
-           <StatCard icon="◎" label="AI Detection Confidence" value="—" unit="replace with real score">
-  <div className="mt-3 h-2 rounded-full bg-black/5 dark:bg-white/10 overflow-hidden">
-    <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-primary to-primary-dark" />
-  </div>
-  <div className="flex justify-between text-[10px] text-muted mt-1">
-    <span>0%</span><span>100%</span>
-  </div>
-</StatCard>
+            <StatCard icon={<TargetIcon />} label="AI Detection Confidence" value="—" unit="replace with real score">
+              <div className="mt-3 h-2 rounded-full bg-black/5 dark:bg-white/10 overflow-hidden">
+                <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-primary to-primary-dark" />
+              </div>
+              <div className="flex justify-between text-[10px] text-muted mt-1">
+                <span>0%</span><span>100%</span>
+              </div>
+            </StatCard>
 
-<StatCard icon="▤" label="Weekly Scans Analyzed" value="—" unit="connect to your data">
-  <div className="flex items-end gap-1.5 h-16 mt-3">
-    {[40, 65, 30, 80, 55, 90, 45].map((h, i) => (
-      <div key={i} className="flex-1 rounded-t-md bg-primary/70" style={{ height: `${h}%` }} />
-    ))}
-  </div>
-  <div className="flex justify-between text-[10px] text-muted mt-1">
-    {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
-      <span key={d}>{d}</span>
-    ))}
-  </div>
-</StatCard>
+            <StatCard icon={<ChartIcon />} label="Weekly Scans Analyzed" value="—" unit="connect to your data">
+              <div className="flex items-end gap-1.5 h-16 mt-3">
+                {[40, 65, 30, 80, 55, 90, 45].map((h, i) => (
+                  <div key={i} className="flex-1 rounded-t-md bg-primary/70" style={{ height: `${h}%` }} />
+                ))}
+              </div>
+              <div className="flex justify-between text-[10px] text-muted mt-1">
+                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
+                  <span key={d}>{d}</span>
+                ))}
+              </div>
+            </StatCard>
+
             <Link
               to={user ? '/results' : '/register'}
               className="mt-2 rounded-full text-white text-center font-semibold text-sm uppercase tracking-wider px-6 py-4 transition-transform hover:-translate-y-0.5"

@@ -33,7 +33,7 @@ export default function About({ user, onLogout }) {
           <h1 className="font-display text-3xl md:text-4xl font-bold text-ink dark:text-white leading-tight">
             AI-assisted screening,<br />built for early awareness
           </h1>
-          <p className="text-muted mt-4 max-w-lg mx-auto">
+          <p className="text-muted font-medium mt-4 max-w-lg mx-auto leading-relaxed">
             PneumoFusion uses a deep learning model to screen chest X-rays for signs of
             pneumonia, helping people get a faster first read while they seek proper medical care.
           </p>
@@ -44,7 +44,7 @@ export default function About({ user, onLogout }) {
           <h2 className="font-display text-xl font-bold text-ink dark:text-white mb-3">
             Why this exists
           </h2>
-          <p className="text-muted leading-relaxed">
+          <p className="text-muted font-medium leading-relaxed">
             Pneumonia remains a leading cause of preventable illness worldwide, and early
             detection makes a real difference in outcomes. PneumoFusion was built as a
             final year project to explore how accessible AI tools can support — not replace —
@@ -64,11 +64,11 @@ export default function About({ user, onLogout }) {
                 key={step.number}
                 className="rounded-3xl bg-white/85 dark:bg-white/[0.06] backdrop-blur-xl shadow-[0_8px_30px_rgba(124,111,240,0.12)] border border-white/60 dark:border-white/10 p-6"
               >
-                <span className="font-mono text-xs text-primary font-semibold">{step.number}</span>
-                <h3 className="font-display font-semibold text-ink dark:text-white mt-2 mb-1.5">
+                <span className="font-mono text-xs text-primary font-bold">{step.number}</span>
+                <h3 className="font-display font-bold text-ink dark:text-white mt-2 mb-1.5">
                   {step.title}
                 </h3>
-                <p className="text-sm text-muted leading-relaxed">{step.description}</p>
+                <p className="text-sm text-muted font-medium leading-relaxed">{step.description}</p>
               </div>
             ))}
           </div>
@@ -77,20 +77,20 @@ export default function About({ user, onLogout }) {
         {/* Tech + disclaimer */}
         <div className="grid md:grid-cols-2 gap-5">
           <div className="rounded-3xl bg-white/85 dark:bg-white/[0.06] backdrop-blur-xl shadow-[0_8px_30px_rgba(124,111,240,0.12)] border border-white/60 dark:border-white/10 p-6">
-            <h3 className="font-display font-semibold text-ink dark:text-white mb-2">
+            <h3 className="font-display font-bold text-ink dark:text-white mb-2">
               Built with
             </h3>
-            <p className="text-sm text-muted leading-relaxed">
+            <p className="text-sm text-muted font-medium leading-relaxed">
               A convolutional neural network trained on chest X-ray data, served through a
               FastAPI backend, with a React interface for uploading scans and reviewing results.
             </p>
           </div>
 
           <div className="rounded-3xl bg-primary/10 dark:bg-primary/10 border border-primary/20 p-6">
-            <h3 className="font-display font-semibold text-ink dark:text-white mb-2">
+            <h3 className="font-display font-bold text-ink dark:text-white mb-2">
               A note on accuracy
             </h3>
-            <p className="text-sm text-muted leading-relaxed">
+            <p className="text-sm text-muted font-medium leading-relaxed">
               PneumoFusion is a screening aid, not a diagnostic tool. Results should always
               be reviewed with a qualified healthcare professional before making any medical decision.
             </p>
