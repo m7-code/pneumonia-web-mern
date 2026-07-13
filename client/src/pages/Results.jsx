@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef , useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import api from '../api/axios';
@@ -13,11 +13,17 @@ export default function Results({ user, onLogout }) {
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
-  // Guest ko results page pe rehne nahi dena
+  // Guest ko results page pe rehne nahi dena - redirect hamesha useEffect me honi chahiye
+useEffect(() => {
   if (!user) {
     navigate('/login');
-    return null;
   }
+}, [user, navigate]);
+
+// Jab tak redirect ho raha hai, kuch render mat karo
+if (!user) {
+  return null;
+}
 
   function handleFile(selectedFile) {
     if (!selectedFile || !selectedFile.type.startsWith('image/')) return;
