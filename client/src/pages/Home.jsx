@@ -14,7 +14,7 @@ export default function Home({ user, onLogout }) {
           <span className="inline-block rounded-full bg-primary text-white text-xs font-semibold px-4 py-1.5 mb-3">
             AI Smarter
           </span>
-          <h1 className="font-display text-3xl md:text-[2.75rem] font-bold text-ink leading-tight">
+         <h1 className="font-display text-3xl md:text-[2.75rem] font-bold text-ink dark:text-white leading-tight">
             Lung Health, Read by AI
           </h1>
           <p className="text-muted mt-2 max-w-md">
@@ -25,8 +25,8 @@ export default function Home({ user, onLogout }) {
         <div className="grid md:grid-cols-[280px_1fr_300px] gap-6">
           {/* LEFT COLUMN */}
           <div className="flex flex-col gap-5 order-2 md:order-1 h-full">
-            <StatCard icon="◎" label="AI Detection Confidence" value="—" unit="replace with real score">
-  <div className="mt-3 h-2 rounded-full bg-black/5 overflow-hidden">
+           <StatCard icon="◎" label="AI Detection Confidence" value="—" unit="replace with real score">
+  <div className="mt-3 h-2 rounded-full bg-black/5 dark:bg-white/10 overflow-hidden">
     <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-primary to-primary-dark" />
   </div>
   <div className="flex justify-between text-[10px] text-muted mt-1">
@@ -46,7 +46,6 @@ export default function Home({ user, onLogout }) {
     ))}
   </div>
 </StatCard>
-
             <Link
               to={user ? '/results' : '/register'}
               className="mt-2 rounded-full text-white text-center font-semibold text-sm uppercase tracking-wider px-6 py-4 transition-transform hover:-translate-y-0.5"
@@ -71,7 +70,7 @@ export default function Home({ user, onLogout }) {
             </div>
 
             {/* Floating connector labels */}
-            <div className="hidden md:block absolute left-2 top-[42%] rounded-2xl bg-white/85 backdrop-blur-xl border border-black/[0.06] px-4 py-2.5 shadow-lg text-xs">
+            <div className="hidden md:block absolute left-2 top-[38%] rounded-2xl bg-white/85 backdrop-blur-xl border border-black/[0.06] px-4 py-2.5 shadow-lg text-xs">
               <div className="text-muted">Oxygen Saturation</div>
               <div className="text-ink font-semibold">— %</div>
             </div>

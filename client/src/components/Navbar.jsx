@@ -27,15 +27,15 @@ export default function Navbar({ user, onLogout }) {
     <header className="sticky top-4 z-50 mx-3 md:mx-6">
       <nav className="mx-auto max-w-7xl rounded-full bg-white/85 dark:bg-white/[0.06] backdrop-blur-xl shadow-[0_8px_30px_rgba(124,111,240,0.14)] border border-white/60 dark:border-white/10 px-4 md:px-5 py-2.5 flex items-center justify-between gap-4">
 
-        {/* LEFT: Logo */}
-        <Link to="/" className="flex items-center gap-2 shrink-0">
-          <span className="h-9 w-9 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-sm">
-            🫁
-          </span>
-          <span className="hidden sm:block font-display font-bold text-ink dark:text-white text-base">
-            PneumoFusion
-          </span>
-        </Link>
+      {/* LEFT: Logo */}
+<Link to="/" className="flex items-center gap-2.5 shrink-0">
+  <span className="h-9 w-9 flex items-center justify-center shrink-0">
+    <img src="/lung_icon.png" alt="PneumoFusion" className="w-full h-full object-contain" />
+  </span>
+  <span className="hidden sm:block font-display font-bold text-ink dark:text-white text-lg">
+    PneumoFusion
+  </span>
+</Link>
 
         {/* CENTER: Segmented pill nav - desktop only */}
         <div className="hidden md:flex items-center gap-1 bg-black/[0.04] dark:bg-white/5 rounded-full p-1">
