@@ -1,41 +1,44 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Result', to: '/results' },
+  { label: 'Report', to: '/results/report' },
 ];
 
-export default function Navbar({ user, onLogout }) {
-  const [dark, setDark] = useState(false);
+// Icons - overall design ke sath consistent stroke style
+const ChevronDownIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+    <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const MenuIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+export default function Navbar({ user, onLogout, dark, setDark }) {
   const [profileOpen, setProfileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved) setDark(saved === 'dark');
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', dark);
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
-  }, [dark]);
 
   return (
     <header className="sticky top-4 z-50 mx-3 md:mx-6">
       <nav className="mx-auto max-w-7xl rounded-full bg-white/85 dark:bg-white/[0.06] backdrop-blur-xl shadow-[0_8px_30px_rgba(124,111,240,0.14)] border border-white/60 dark:border-white/10 px-4 md:px-5 py-2.5 flex items-center justify-between gap-4">
 
-      {/* LEFT: Logo */}
-<Link to="/" className="flex items-center gap-2.5 shrink-0">
-  <span className="h-9 w-9 flex items-center justify-center shrink-0">
-    <img src="/lung_icon.png" alt="PneumoFusion" className="w-full h-full object-contain" />
-  </span>
-  <span className="hidden sm:block font-display font-bold text-ink dark:text-white text-lg">
-    PneumoFusion
-  </span>
-</Link>
+        {/* LEFT: Logo */}
+        <Link to="/" className="flex items-center gap-2.5 shrink-0">
+          <span className="h-9 w-9 flex items-center justify-center shrink-0">
+            <img src="/lung_icon.png" alt="PneumoFusion" className="w-full h-full object-contain" />
+          </span>
+          <span className="hidden sm:block font-display font-bold text-ink dark:text-white text-lg">
+            PneumoFusion
+          </span>
+        </Link>
 
         {/* CENTER: Segmented pill nav - desktop only */}
         <div className="hidden md:flex items-center gap-1 bg-black/[0.04] dark:bg-white/5 rounded-full p-1">
@@ -59,9 +62,6 @@ export default function Navbar({ user, onLogout }) {
 
         {/* RIGHT: Icons + toggle + profile */}
         <div className="flex items-center gap-2">
-          {/* Icon buttons - decorative, reference jaisi */}
-         
-
           {/* Dark mode toggle - exact provided design */}
           <button
             className={`toggle-switch ${dark ? 'dark-active' : ''}`}
@@ -84,7 +84,9 @@ export default function Navbar({ user, onLogout }) {
                 <span className="hidden sm:block text-sm text-ink dark:text-white font-medium">
                   {user.name}
                 </span>
-                <span className="text-muted text-xs">⌄</span>
+                <span className="text-muted">
+                  <ChevronDownIcon />
+                </span>
               </button>
 
               {profileOpen && (
@@ -120,7 +122,7 @@ export default function Navbar({ user, onLogout }) {
             className="md:hidden h-9 w-9 rounded-full bg-black/[0.04] dark:bg-white/5 flex items-center justify-center text-ink dark:text-white"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            ⋮
+            <MenuIcon />
           </button>
         </div>
       </nav>

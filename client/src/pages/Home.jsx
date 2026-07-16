@@ -20,10 +20,10 @@ const ChartIcon = () => (
   </svg>
 );
 
-export default function Home({ user, onLogout }) {
+export default function Home({ user, onLogout , dark, setDark }) {
   return (
     <div className="min-h-screen">
-      <Navbar user={user} onLogout={onLogout} />
+      <Navbar user={user} onLogout={onLogout} dark={dark} setDark={setDark} />
 
       <main className="mx-auto max-w-7xl px-5 md:px-8 pt-10 pb-16">
         {/* Greeting */}

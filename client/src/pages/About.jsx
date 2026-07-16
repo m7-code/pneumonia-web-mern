@@ -19,10 +19,10 @@ const STEPS = [
   },
 ];
 
-export default function About({ user, onLogout }) {
+export default function About({ user, onLogout, dark, setDark }) {
   return (
     <div className="min-h-screen">
-      <Navbar user={user} onLogout={onLogout} />
+      <Navbar user={user} onLogout={onLogout} dark={dark} setDark={setDark} />
 
       <main className="mx-auto max-w-4xl px-5 md:px-8 pt-14 pb-20">
         {/* Hero */}
