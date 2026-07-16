@@ -42,16 +42,16 @@ export default function Home({ user, onLogout , dark, setDark }) {
         <div className="grid md:grid-cols-[280px_1fr_300px] gap-6">
           {/* LEFT COLUMN */}
           <div className="flex flex-col gap-5 order-2 md:order-1 h-full">
-            <StatCard icon={<TargetIcon />} label="AI Detection Confidence" value="—" unit="replace with real score">
+            <StatCard icon={<TargetIcon />} label="AI Detection Confidence" value="94.55%" unit="replace with real score">
               <div className="mt-3 h-2 rounded-full bg-black/5 dark:bg-white/10 overflow-hidden">
-                <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-primary to-primary-dark" />
+                <div className="h-full w-[94.55%] rounded-full bg-gradient-to-r from-primary to-primary-dark" />
               </div>
               <div className="flex justify-between text-[10px] text-muted mt-1">
                 <span>0%</span><span>100%</span>
               </div>
             </StatCard>
 
-            <StatCard icon={<ChartIcon />} label="Weekly Scans Analyzed" value="—" unit="connect to your data">
+            <StatCard icon={<ChartIcon />} label="Weekly Scans Analyzed" value="" unit="connect to your data">
               <div className="flex items-end gap-1.5 h-16 mt-3">
                 {[40, 65, 30, 80, 55, 90, 45].map((h, i) => (
                   <div key={i} className="flex-1 rounded-t-md bg-primary/70" style={{ height: `${h}%` }} />
@@ -90,11 +90,11 @@ export default function Home({ user, onLogout , dark, setDark }) {
             {/* Floating connector labels */}
             <div className="hidden md:block absolute left-2 top-[38%] rounded-2xl bg-white/85 backdrop-blur-xl border border-black/[0.06] px-4 py-2.5 shadow-lg text-xs">
               <div className="text-muted">Oxygen Saturation</div>
-              <div className="text-ink font-semibold">— %</div>
+              <div className="text-ink font-semibold">95%</div>
             </div>
             <div className="hidden md:block absolute right-2 top-[55%] rounded-2xl bg-white/85 backdrop-blur-xl border border-black/[0.06] px-4 py-2.5 shadow-lg text-xs">
               <div className="text-muted">Respiratory Rate</div>
-              <div className="text-ink font-semibold">— /min</div>
+              <div className="text-ink font-semibold">12-20/min</div>
             </div>
             <div className="hidden md:block absolute left-1/2 -translate-x-1/2 bottom-0 rounded-2xl bg-white/85 backdrop-blur-xl border border-black/[0.06] px-4 py-2.5 shadow-lg text-xs">
               <div className="text-muted">Airway Clarity</div>
