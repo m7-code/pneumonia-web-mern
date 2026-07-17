@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import api from '../api/axios';
 
-export default function Results({ user, onLogout ,dark , setDark }) {
+export default function Results({ user, onLogout, dark, setDark }) {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [dragOver, setDragOver] = useState(false);
@@ -55,7 +55,6 @@ export default function Results({ user, onLogout ,dark , setDark }) {
   }
 
   function handleViewFullReport() {
-    // Result + preview ko naye page ko navigation state ke through bhejna
     navigate('/results/report', { state: { result, preview } });
   }
 
@@ -79,10 +78,11 @@ export default function Results({ user, onLogout ,dark , setDark }) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Dono columns same height le lete hain (default items-stretch), fixed height se pin kiya hai */}
+        <div className="grid md:grid-cols-2 gap-6 md:h-[560px]">
           {/* LEFT: Upload */}
-          <div className="rounded-3xl bg-white/85 dark:bg-white/[0.06] backdrop-blur-xl shadow-[0_8px_30px_rgba(124,111,240,0.12)] border border-white/60 dark:border-white/10 p-5 flex flex-col">
-            <h2 className="font-display font-bold text-ink dark:text-white mb-3 text-sm">
+          <div className="rounded-3xl bg-white/85 dark:bg-white/10 backdrop-blur-xl shadow-[0_8px_30px_rgba(124,111,240,0.12)] border border-white/60 dark:border-white/15 p-5 flex flex-col h-full overflow-hidden">
+            <h2 className="font-display font-bold text-ink dark:text-white mb-3 text-sm shrink-0">
               Upload X-Ray
             </h2>
 
@@ -91,12 +91,12 @@ export default function Results({ user, onLogout ,dark , setDark }) {
               onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
               onDragLeave={() => setDragOver(false)}
               onDrop={handleDrop}
-              className={`flex-1 min-h-[220px] rounded-2xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-colors p-4 ${
+              className={`flex-1 min-h-0 rounded-2xl border-2 border-dashed overflow-hidden flex flex-col items-center justify-center cursor-pointer transition-colors ${
                 dragOver ? 'border-primary bg-primary/5' : 'border-black/10 dark:border-white/15'
               }`}
             >
               {preview ? (
-                <img src={preview} alt="X-ray preview" className="max-h-48 rounded-xl object-contain" />
+                <img src={preview} alt="X-ray preview" className="w-full h-full object-cover" />
               ) : (
                 <>
                   <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-xl mb-2">
@@ -119,7 +119,7 @@ export default function Results({ user, onLogout ,dark , setDark }) {
             />
 
             {error && (
-              <div className="mt-3 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-400 text-sm px-4 py-2">
+              <div className="mt-3 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-400 text-sm px-4 py-2 shrink-0">
                 {error}
               </div>
             )}
@@ -127,7 +127,7 @@ export default function Results({ user, onLogout ,dark , setDark }) {
             <button
               onClick={handleAnalyze}
               disabled={!file || loading}
-              className="mt-4 rounded-full text-white font-semibold text-sm uppercase tracking-wider py-3 transition-transform hover:-translate-y-0.5 disabled:opacity-40 disabled:translate-y-0"
+              className="mt-4 rounded-full text-white font-semibold text-sm uppercase tracking-wider py-3 transition-transform hover:-translate-y-0.5 disabled:opacity-40 disabled:translate-y-0 shrink-0"
               style={{
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                 boxShadow: '0 5px 20px rgba(102, 126, 234, 0.4)',
@@ -138,8 +138,8 @@ export default function Results({ user, onLogout ,dark , setDark }) {
           </div>
 
           {/* RIGHT: Results */}
-          <div className="rounded-3xl bg-white/85 dark:bg-white/[0.06] backdrop-blur-xl shadow-[0_8px_30px_rgba(124,111,240,0.12)] border border-white/60 dark:border-white/10 p-5 flex flex-col">
-            <h2 className="font-display font-bold text-ink dark:text-white mb-3 text-sm">
+          <div className="rounded-3xl bg-white/85 dark:bg-white/10 backdrop-blur-xl shadow-[0_8px_30px_rgba(124,111,240,0.12)] border border-white/60 dark:border-white/15 p-5 flex flex-col h-full overflow-hidden">
+            <h2 className="font-display font-bold text-ink dark:text-white mb-3 text-sm shrink-0">
               Result
             </h2>
 
@@ -148,8 +148,8 @@ export default function Results({ user, onLogout ,dark , setDark }) {
                 Upload an X-ray to see the screening result here.
               </div>
             ) : (
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center justify-between">
+              <div className="flex-1 min-h-0 flex flex-col gap-4 overflow-y-auto pr-1">
+                <div className="flex items-center justify-between shrink-0">
                   <div>
                     <p className="text-[11px] text-muted">Diagnosis</p>
                     <p className={`text-xl font-bold ${isPneumonia ? 'text-coral-dark' : 'text-emerald-600'}`}>
@@ -162,7 +162,7 @@ export default function Results({ user, onLogout ,dark , setDark }) {
                   </div>
                 </div>
 
-                <div className="rounded-xl bg-black/[0.03] dark:bg-white/5 px-3 py-2.5 flex flex-col gap-1.5 text-xs">
+                <div className="rounded-xl bg-black/[0.03] dark:bg-white/5 px-3 py-2.5 flex flex-col gap-1.5 text-xs shrink-0">
                   <div className="flex justify-between">
                     <span className="text-muted font-medium">Normal</span>
                     <span className="font-semibold text-ink dark:text-white">{result.normal_prob}%</span>
@@ -174,8 +174,8 @@ export default function Results({ user, onLogout ,dark , setDark }) {
                 </div>
 
                 {isPneumonia && (
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
+                  <div className="flex-1 min-h-0 flex flex-col">
+                    <div className="flex items-center justify-between mb-2 shrink-0">
                       <p className="text-xs font-semibold text-ink dark:text-white">Infected Area (Grad-CAM)</p>
                       <div className="flex gap-1 bg-black/[0.04] dark:bg-white/5 rounded-full p-0.5">
                         <button
@@ -196,13 +196,15 @@ export default function Results({ user, onLogout ,dark , setDark }) {
                         </button>
                       </div>
                     </div>
-                    <img src={gradcamSrc} alt="Grad-CAM visualization" className="w-full rounded-xl" />
+                    <div className="flex-1 min-h-[140px] rounded-xl overflow-hidden">
+                      <img src={gradcamSrc} alt="Grad-CAM visualization" className="w-full h-full object-cover" />
+                    </div>
                   </div>
                 )}
 
                 <button
                   onClick={handleViewFullReport}
-                  className="mt-1 rounded-full border-2 border-primary text-primary text-center font-semibold text-xs uppercase tracking-wider py-2.5 hover:bg-primary hover:text-white transition-colors"
+                  className="mt-1 rounded-full border-2 border-primary text-primary text-center font-semibold text-xs uppercase tracking-wider py-2.5 hover:bg-primary hover:text-white transition-colors shrink-0"
                 >
                   View Full Report
                 </button>
