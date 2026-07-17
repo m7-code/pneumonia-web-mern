@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import StatCard from '../components/StatCard';
 import AssistantCard from '../components/AssistantCard';
+import { useState } from 'react';
 
 // Icons - StatCard headers ke liye, overall design ke sath consistent stroke style
 const TargetIcon = () => (
@@ -21,6 +22,7 @@ const ChartIcon = () => (
 );
 
 export default function Home({ user, onLogout , dark, setDark }) {
+  const [mobileChatOpen, setMobileChatOpen] = useState(false);
   return (
     <div className="min-h-screen">
       <Navbar user={user} onLogout={onLogout} dark={dark} setDark={setDark} />
@@ -103,9 +105,9 @@ export default function Home({ user, onLogout , dark, setDark }) {
           </div>
 
           {/* RIGHT COLUMN */}
-          <div className="flex flex-col gap-5 order-3 h-full">
-            <AssistantCard userName={user?.name} />
-          </div>
+         <div className="hidden md:flex flex-col gap-5 order-3 h-full">
+  <AssistantCard userName={user?.name} />
+</div>
         </div>
 
         {/* Disclaimer */}
@@ -113,6 +115,34 @@ export default function Home({ user, onLogout , dark, setDark }) {
           PneumoFusion provides AI-assisted screening support and does not replace professional medical diagnosis.
         </p>
       </main>
+
+       {/* Mobile floating chat button */}
+      <button
+        onClick={() => setMobileChatOpen(true)}
+        className="md:hidden fixed bottom-5 right-5 h-14 w-14 rounded-full bg-primary shadow-[0_8px_24px_rgba(124,111,240,0.5)] flex items-center justify-center z-40"
+        aria-label="Open assistant"
+      >
+        <img src="/chat_icon2.png" alt="Chat" className="h-8 w-8 object-contain" />
+      </button>
+
+      {/* Mobile chat overlay */}
+      {mobileChatOpen && (
+        <div className="md:hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-end justify-center p-3">
+          <div className="w-full max-w-md">
+            <div className="flex justify-end mb-2">
+              <button
+                onClick={() => setMobileChatOpen(false)}
+                className="h-9 w-9 rounded-full bg-white dark:bg-white/10 flex items-center justify-center text-ink dark:text-white shadow-lg"
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+            <AssistantCard userName={user?.name} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+  
