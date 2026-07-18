@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// Backend Express API ka base URL - baad me .env se dynamic kar denge
+// Backend Express API ka base URL - Vite env variable se aata hai
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
   withCredentials: true, // zaroori hai taake httpOnly cookie (JWT) bhej/receive ho sake
 });
 
