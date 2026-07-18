@@ -15,7 +15,7 @@ export default function Results({ user, onLogout, dark, setDark }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) navigate('/login');
+    if (!user) navigate('/login', { replace: true });
   }, [user, navigate]);
 
   if (!user) return null;
