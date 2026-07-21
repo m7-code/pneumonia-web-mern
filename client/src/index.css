@@ -249,19 +249,19 @@ body {
 
 /* Color tint variants */
 .glass-card.tint-purple {
-  --glow-color: rgba(167, 139, 250, 0.45);
-  background: linear-gradient(140deg, rgba(196, 181, 253, 0.55), rgba(255, 255, 255, 0.35));
+  --glow-color: rgba(161, 132, 248, 0.45);
+  background: linear-gradient(140deg, rgba(187, 173, 243, 0.55), rgba(255, 255, 255, 0.35));
 }
 .glass-card.tint-teal {
-  --glow-color: rgba(103, 232, 249, 0.4);
-  background: linear-gradient(140deg, rgba(153, 246, 228, 0.5), rgba(255, 255, 255, 0.35));
+  --glow-color: rgba(96, 229, 247, 0.4);
+  background: linear-gradient(140deg, rgba(131, 226, 207, 0.5), rgba(255, 255, 255, 0.35));
 }
 .glass-card.tint-pink {
-  --glow-color: rgba(249, 168, 212, 0.4);
-  background: linear-gradient(140deg, rgba(251, 207, 232, 0.5), rgba(255, 255, 255, 0.35));
+  --glow-color: rgba(226, 40, 143, 0.4);
+  background: linear-gradient(140deg, rgba(231, 161, 201, 0.5), rgba(255, 255, 255, 0.35));
 }
 .glass-card.tint-neutral {
-  --glow-color: rgba(124, 111, 240, 0.25);
+  --glow-color: rgba(121, 107, 243, 0.25);
   background: linear-gradient(140deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
 }
 
