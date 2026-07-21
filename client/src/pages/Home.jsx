@@ -145,14 +145,18 @@ export default function Home({ user, onLogout, dark, setDark }) {
           </p>
         </main>
 
-        {/* Mobile floating chat button */}
+        {/*  Mobile FAB – sirf image, koi background color nahi */}
         <button
-          onClick={() => setMobileChatOpen(true)}
-          className="md:hidden fixed bottom-5 right-5 h-14 w-14 rounded-full bg-primary shadow-[0_8px_24px_rgba(124,111,240,0.5)] flex items-center justify-center z-40"
-          aria-label="Open assistant"
-        >
-          <img src="/chat_icon2.png" alt="Chat" className="h-8 w-8 object-contain" />
-        </button>
+  onClick={() => setMobileChatOpen(true)}
+  className="md:hidden fixed bottom-5 right-5 h-26 w-26 flex items-center justify-center z-40"
+  aria-label="Open assistant"
+>
+  <img
+    src="/chat_icon2.png"
+    alt="Chat"
+    className="h-full w-full object-contain"
+  />
+</button>
 
         {/* Mobile chat overlay */}
         {mobileChatOpen && (
