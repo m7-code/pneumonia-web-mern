@@ -9,9 +9,10 @@ const NAV_LINKS = [
 ];
 
 // Icons - overall design ke sath consistent stroke style
-const ChevronDownIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-    <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+const LogoutIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M16 17l5-5-5-5M21 12H9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -22,7 +23,6 @@ const MenuIcon = () => (
 );
 
 export default function Navbar({ user, onLogout, dark, setDark }) {
-  const [profileOpen, setProfileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -73,32 +73,21 @@ export default function Navbar({ user, onLogout, dark, setDark }) {
 
           {/* Profile / Auth */}
           {user ? (
-            <div className="relative">
+            <div className="hidden sm:flex items-center gap-1.5 bg-black/[0.04] dark:bg-white/5 rounded-full pl-1 pr-1.5 py-1">
+              <span className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-xs font-semibold shrink-0">
+                {user.name?.[0]?.toUpperCase()}
+              </span>
+              <span className="text-sm text-ink dark:text-white font-medium px-1 max-w-[100px] truncate">
+                {user.name}
+              </span>
               <button
-                onClick={() => setProfileOpen(!profileOpen)}
-                className="flex items-center gap-2 pl-1 pr-2.5 py-1 rounded-full bg-black/[0.04] dark:bg-white/5 hover:bg-primary/10 transition-colors"
+                onClick={onLogout}
+                className="h-7 w-7 rounded-full flex items-center justify-center text-muted hover:text-primary hover:bg-white/60 dark:hover:bg-white/10 transition-colors shrink-0"
+                aria-label="Logout"
+                title="Logout"
               >
-                <span className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-xs font-semibold">
-                  {user.name?.[0]?.toUpperCase()}
-                </span>
-                <span className="hidden sm:block text-sm text-ink dark:text-white font-medium">
-                  {user.name}
-                </span>
-                <span className="text-muted">
-                  <ChevronDownIcon />
-                </span>
+                <LogoutIcon />
               </button>
-
-              {profileOpen && (
-                <div className="glass-card tint-neutral absolute right-0 mt-2 w-40 rounded-2xl p-1.5">
-                  <button
-                    onClick={onLogout}
-                    className="relative z-[2] w-full text-left px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10 transition-colors"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
             </div>
           ) : (
             <div className="hidden sm:flex items-center gap-2">
@@ -130,20 +119,54 @@ export default function Navbar({ user, onLogout, dark, setDark }) {
       {/* Mobile dropdown */}
       {menuOpen && (
         <div className="glass-card tint-neutral md:hidden mt-2 mx-1 rounded-2xl p-3 flex flex-col gap-1">
-          {NAV_LINKS.map((link) => (
-            <Link key={link.to} to={link.to} className="relative z-[2] px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10">
-              {link.label}
-            </Link>
-          ))}
+          {/* User info row - mobile only */}
+          {user && (
+            <div className="relative z-[2] flex items-center gap-2.5 px-2 py-2 mb-1 border-b border-black/5 dark:border-white/10">
+              <span className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-xs font-semibold shrink-0">
+                {user.name?.[0]?.toUpperCase()}
+              </span>
+              <span className="text-sm text-ink dark:text-white font-medium truncate">
+                {user.name}
+              </span>
+            </div>
+          )}
+
+          {NAV_LINKS.map((link) => {
+            const active = location.pathname === link.to;
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setMenuOpen(false)}
+                className={`relative z-[2] px-3 py-2 rounded-xl text-sm transition-colors ${
+                  active
+                    ? 'bg-primary text-white font-medium'
+                    : 'text-ink dark:text-white hover:bg-primary/10'
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+
           <div className="relative z-[2] h-px bg-black/5 dark:bg-white/10 my-1" />
+
           {user ? (
-            <button onClick={onLogout} className="relative z-[2] px-3 py-2 rounded-xl text-left text-sm text-ink dark:text-white hover:bg-primary/10">
+            <button
+              onClick={() => { onLogout(); setMenuOpen(false); }}
+              className="relative z-[2] flex items-center gap-2 px-3 py-2 rounded-xl text-left text-sm text-ink dark:text-white hover:bg-primary/10"
+            >
+              <LogoutIcon />
               Logout
             </button>
           ) : (
             <>
-              <Link to="/login" className="relative z-[2] px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10">Login</Link>
-              <Link to="/register" className="relative z-[2] px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10">Sign up</Link>
+              <Link to="/login" onClick={() => setMenuOpen(false)} className="relative z-[2] px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10">
+                Login
+              </Link>
+              <Link to="/register" onClick={() => setMenuOpen(false)} className="relative z-[2] px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10">
+                Sign up
+              </Link>
             </>
           )}
         </div>
