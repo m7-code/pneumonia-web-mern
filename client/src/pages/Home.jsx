@@ -2,9 +2,8 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import StatCard from '../components/StatCard';
 import AssistantCard from '../components/AssistantCard';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-// Icons - StatCard headers ke liye, overall design ke sath consistent stroke style
 const TargetIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
     <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
@@ -23,6 +22,59 @@ const ChartIcon = () => (
 
 export default function Home({ user, onLogout, dark, setDark }) {
   const [mobileChatOpen, setMobileChatOpen] = useState(false);
+
+  // Draggable button position - pehli baar bottom-right corner me
+  const FAB_SIZE = 104; // h-26 w-26 = 104px
+  const [btnPos, setBtnPos] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return { x: window.innerWidth - FAB_SIZE - 250, y: window.innerHeight - FAB_SIZE -270 };
+    }
+    return { x: 0, y: 0 };
+  });
+  const dragRef = useRef({ dragging: false, moved: false, offsetX: 0, offsetY: 0 });
+
+  function handlePointerDown(e) {
+    const point = e.touches ? e.touches[0] : e;
+    dragRef.current.dragging = true;
+    dragRef.current.moved = false;
+    dragRef.current.offsetX = point.clientX - btnPos.x;
+    dragRef.current.offsetY = point.clientY - btnPos.y;
+  }
+
+  function handlePointerMove(e) {
+    if (!dragRef.current.dragging) return;
+    const point = e.touches ? e.touches[0] : e;
+    dragRef.current.moved = true;
+
+    const newX = Math.min(Math.max(0, point.clientX - dragRef.current.offsetX), window.innerWidth - FAB_SIZE);
+    const newY = Math.min(Math.max(0, point.clientY - dragRef.current.offsetY), window.innerHeight - FAB_SIZE);
+    setBtnPos({ x: newX, y: newY });
+  }
+
+  function handlePointerUp() {
+    dragRef.current.dragging = false;
+  }
+
+  function handleButtonClick() {
+    if (dragRef.current.moved) {
+      dragRef.current.moved = false;
+      return;
+    }
+    setMobileChatOpen(true);
+  }
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handlePointerMove);
+    window.addEventListener('mouseup', handlePointerUp);
+    window.addEventListener('touchmove', handlePointerMove, { passive: false });
+    window.addEventListener('touchend', handlePointerUp);
+    return () => {
+      window.removeEventListener('mousemove', handlePointerMove);
+      window.removeEventListener('mouseup', handlePointerUp);
+      window.removeEventListener('touchmove', handlePointerMove);
+      window.removeEventListener('touchend', handlePointerUp);
+    };
+  }, [btnPos]);
 
   return (
     <div className="min-h-screen relative">
@@ -95,7 +147,7 @@ export default function Home({ user, onLogout, dark, setDark }) {
                   boxShadow: '0 8px 28px rgba(124, 111, 240, 0.5), inset 0 1px 1px rgba(255,255,255,0.5)',
                 }}
               >
-                <span className="relative z-[2]">Analyze a scan →</span>
+                <span className="relative z-[2]">Analyze a scan</span>
               </Link>
             </div>
 
@@ -110,7 +162,7 @@ export default function Home({ user, onLogout, dark, setDark }) {
                 />
               </div>
 
-              {/* ✅ Floating labels – ab position container + glass-card alag */}
+              {/* Floating labels */}
               <div className="hidden md:block absolute left-2 top-[38%]">
                 <div className="glass-card tint-purple rounded-2xl px-4 py-2.5 text-xs w-36">
                   <div className="relative z-[2] text-muted">Oxygen Saturation</div>
@@ -139,22 +191,24 @@ export default function Home({ user, onLogout, dark, setDark }) {
             </div>
           </div>
 
-          {/* Disclaimer */}
           <p className="text-center text-[11px] text-muted mt-14">
             PneumoFusion provides AI-assisted screening support and does not replace professional medical diagnosis.
           </p>
         </main>
 
-        {/*  Mobile FAB – sirf image, koi background color nahi */}
+        {/* Mobile FAB - sirf image, draggable, koi background color nahi */}
         <button
-  onClick={() => setMobileChatOpen(true)}
-  className="md:hidden fixed bottom-5 right-5 h-26 w-26 flex items-center justify-center z-40"
+  onMouseDown={handlePointerDown}
+  onTouchStart={handlePointerDown}
+  onClick={handleButtonClick}
+  style={{ left: `${btnPos.x}px`, top: `${btnPos.y}px` }}
+  className="md:hidden fixed h-[104px] w-[104px] flex items-center justify-center z-40 touch-none cursor-grab active:cursor-grabbing"
   aria-label="Open assistant"
 >
   <img
     src="/chat_icon2.png"
     alt="Chat"
-    className="h-full w-full object-contain"
+    className="h-full w-full object-contain pointer-events-none"
   />
 </button>
 
