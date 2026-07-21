@@ -28,10 +28,10 @@ export default function Navbar({ user, onLogout, dark, setDark }) {
 
   return (
     <header className="sticky top-4 z-50 mx-3 md:mx-6">
-      <nav className="mx-auto max-w-7xl rounded-full bg-white/85 dark:bg-white/[0.06] backdrop-blur-xl shadow-[0_8px_30px_rgba(124,111,240,0.14)] border border-white/60 dark:border-white/10 px-4 md:px-5 py-2.5 flex items-center justify-between gap-4">
+      <nav className="glass-card tint-neutral mx-auto max-w-7xl rounded-full px-4 md:px-5 py-2.5 flex items-center justify-between gap-4">
 
         {/* LEFT: Logo */}
-        <Link to="/" className="flex items-center gap-2.5 shrink-0">
+        <Link to="/" className="relative z-[2] flex items-center gap-2.5 shrink-0">
           <span className="h-9 w-9 flex items-center justify-center shrink-0">
             <img src="/lung_icon.png" alt="PneumoFusion" className="w-full h-full object-contain" />
           </span>
@@ -41,7 +41,7 @@ export default function Navbar({ user, onLogout, dark, setDark }) {
         </Link>
 
         {/* CENTER: Segmented pill nav - desktop only */}
-        <div className="hidden md:flex items-center gap-1 bg-black/[0.04] dark:bg-white/5 rounded-full p-1">
+        <div className="relative z-[2] hidden md:flex items-center gap-1 bg-black/[0.04] dark:bg-white/5 rounded-full p-1">
           {NAV_LINKS.map((link) => {
             const active = location.pathname === link.to;
             return (
@@ -50,18 +50,18 @@ export default function Navbar({ user, onLogout, dark, setDark }) {
                 to={link.to}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                   active
-                    ? 'bg-primary text-white shadow-sm'
+                    ? 'glossy-btn bg-primary text-white shadow-sm'
                     : 'text-muted hover:text-ink dark:hover:text-white'
                 }`}
               >
-                {link.label}
+                <span className="relative z-[2]">{link.label}</span>
               </Link>
             );
           })}
         </div>
 
         {/* RIGHT: Icons + toggle + profile */}
-        <div className="flex items-center gap-2">
+        <div className="relative z-[2] flex items-center gap-2">
           {/* Dark mode toggle - exact provided design */}
           <button
             className={`toggle-switch ${dark ? 'dark-active' : ''}`}
@@ -90,10 +90,10 @@ export default function Navbar({ user, onLogout, dark, setDark }) {
               </button>
 
               {profileOpen && (
-                <div className="absolute right-0 mt-2 w-40 rounded-2xl bg-white dark:bg-[#1D1A33] shadow-lg border border-black/5 dark:border-white/10 p-1.5">
+                <div className="glass-card tint-neutral absolute right-0 mt-2 w-40 rounded-2xl p-1.5">
                   <button
                     onClick={onLogout}
-                    className="w-full text-left px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10 transition-colors"
+                    className="relative z-[2] w-full text-left px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10 transition-colors"
                   >
                     Logout
                   </button>
@@ -110,9 +110,9 @@ export default function Navbar({ user, onLogout, dark, setDark }) {
               </Link>
               <Link
                 to="/register"
-                className="px-4 py-1.5 rounded-full text-sm font-medium bg-primary text-white hover:bg-primary-dark transition-colors"
+                className="glossy-btn px-4 py-1.5 rounded-full text-sm font-medium bg-primary text-white hover:bg-primary-dark transition-colors"
               >
-                Sign up
+                <span className="relative z-[2]">Sign up</span>
               </Link>
             </div>
           )}
@@ -129,21 +129,21 @@ export default function Navbar({ user, onLogout, dark, setDark }) {
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden mt-2 mx-1 rounded-2xl bg-white/95 dark:bg-white/[0.06] backdrop-blur-xl shadow-lg border border-white/60 dark:border-white/10 p-3 flex flex-col gap-1">
+        <div className="glass-card tint-neutral md:hidden mt-2 mx-1 rounded-2xl p-3 flex flex-col gap-1">
           {NAV_LINKS.map((link) => (
-            <Link key={link.to} to={link.to} className="px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10">
+            <Link key={link.to} to={link.to} className="relative z-[2] px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10">
               {link.label}
             </Link>
           ))}
-          <div className="h-px bg-black/5 dark:bg-white/10 my-1" />
+          <div className="relative z-[2] h-px bg-black/5 dark:bg-white/10 my-1" />
           {user ? (
-            <button onClick={onLogout} className="px-3 py-2 rounded-xl text-left text-sm text-ink dark:text-white hover:bg-primary/10">
+            <button onClick={onLogout} className="relative z-[2] px-3 py-2 rounded-xl text-left text-sm text-ink dark:text-white hover:bg-primary/10">
               Logout
             </button>
           ) : (
             <>
-              <Link to="/login" className="px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10">Login</Link>
-              <Link to="/register" className="px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10">Sign up</Link>
+              <Link to="/login" className="relative z-[2] px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10">Login</Link>
+              <Link to="/register" className="relative z-[2] px-3 py-2 rounded-xl text-sm text-ink dark:text-white hover:bg-primary/10">Sign up</Link>
             </>
           )}
         </div>

@@ -18,15 +18,138 @@
 
 body {
   font-family: var(--font-body);
-  background: linear-gradient(135deg, #beaee8 0%, #ffffff 50%, #beaee8 100%);
+  background: #f2f8fa;
   min-height: 100vh;
 }
 
 .dark body {
-  background: linear-gradient(135deg, #2d2a4b 0%, #24213d 100%);
+  background: #14121F;
 }
 
-/* Toggle switch - exact design jo diya gaya */
+/* ---------- Aurora background blobs ---------- */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  animation: aurora-drift 18s ease-in-out infinite;
+}
+
+.aurora-blob.one {
+  width: 480px;
+  height: 480px;
+  top: -120px;
+  left: -100px;
+  background: radial-gradient(circle, #A78BFA 0%, transparent 70%);
+  animation-delay: 0s;
+}
+
+.aurora-blob.two {
+  width: 420px;
+  height: 420px;
+  top: 100px;
+  right: -100px;
+  background: radial-gradient(circle, #67E8F9 0%, transparent 70%);
+  animation-delay: -6s;
+}
+
+.aurora-blob.three {
+  width: 400px;
+  height: 400px;
+  bottom: -140px;
+  left: 30%;
+  background: radial-gradient(circle, #F9A8D4 0%, transparent 70%);
+  animation-delay: -12s;
+}
+
+@keyframes aurora-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, 40px) scale(1.08); }
+  66% { transform: translate(-25px, -20px) scale(0.95); }
+}
+
+/* ---------- Liquid glass panel ---------- */
+.glass-panel {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.25));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    inset 0 -8px 20px rgba(255, 255, 255, 0.15),
+    0 8px 32px rgba(124, 111, 240, 0.18);
+}
+
+.dark .glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Glossy top-sheen highlight line */
+.glass-sheen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+}
+
+/* Iridescent gradient border ring (for special cards) */
+.iridescent-ring {
+  position: relative;
+}
+.iridescent-ring::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(120deg, #A78BFA, #67E8F9, #F9A8D4, #A78BFA);
+  background-size: 300% 300%;
+  animation: iridescent-shift 6s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+@keyframes iridescent-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Glossy pill button */
+.glossy-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.glossy-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.45), transparent);
+  border-radius: inherit;
+  z-index: 1;
+  pointer-events: none;
+}
+/* Toggle switch - dark mode ke liye */
 .toggle-switch {
   width: 56px;
   height: 28px;
@@ -63,4 +186,104 @@ body {
   transform: translateX(28px);
   background: white;
   box-shadow: 0 0 8px rgba(200, 100, 255, 0.6), 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+/* ---------- Aurora background (poore page pe hamesha visible) ---------- */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  animation: aurora-drift 18s ease-in-out infinite;
+}
+.aurora-blob.one {
+  width: 480px; height: 480px; top: -120px; left: -100px;
+  background: radial-gradient(circle, #A78BFA 0%, transparent 70%);
+}
+.aurora-blob.two {
+  width: 420px; height: 420px; top: 60px; right: -100px;
+  background: radial-gradient(circle, #67E8F9 0%, transparent 70%);
+  animation-delay: -6s;
+}
+.aurora-blob.three {
+  width: 400px; height: 400px; bottom: -140px; left: 35%;
+  background: radial-gradient(circle, #F9A8D4 0%, transparent 70%);
+  animation-delay: -12s;
+}
+@keyframes aurora-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, 40px) scale(1.08); }
+  66% { transform: translate(-25px, -20px) scale(0.95); }
+}
+
+/* ---------- Glossy colored glass card ---------- */
+.glass-card {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    0 12px 32px -8px var(--glow-color, rgba(124, 111, 240, 0.35));
+}
+
+/* Diagonal glossy streak - top-left se light aati hui */
+.glass-card::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -30%;
+  width: 70%;
+  height: 220%;
+  background: linear-gradient(115deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.05) 35%, transparent 50%);
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+/* Color tint variants */
+.glass-card.tint-purple {
+  --glow-color: rgba(167, 139, 250, 0.45);
+  background: linear-gradient(140deg, rgba(196, 181, 253, 0.55), rgba(255, 255, 255, 0.35));
+}
+.glass-card.tint-teal {
+  --glow-color: rgba(103, 232, 249, 0.4);
+  background: linear-gradient(140deg, rgba(153, 246, 228, 0.5), rgba(255, 255, 255, 0.35));
+}
+.glass-card.tint-pink {
+  --glow-color: rgba(249, 168, 212, 0.4);
+  background: linear-gradient(140deg, rgba(251, 207, 232, 0.5), rgba(255, 255, 255, 0.35));
+}
+.glass-card.tint-neutral {
+  --glow-color: rgba(124, 111, 240, 0.25);
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+}
+
+.dark .glass-card.tint-purple { background: linear-gradient(140deg, rgba(167,139,250,0.22), rgba(255,255,255,0.04)); }
+.dark .glass-card.tint-teal { background: linear-gradient(140deg, rgba(103,232,249,0.18), rgba(255,255,255,0.04)); }
+.dark .glass-card.tint-pink { background: linear-gradient(140deg, rgba(249,168,212,0.18), rgba(255,255,255,0.04)); }
+.dark .glass-card.tint-neutral { background: linear-gradient(140deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)); }
+.dark .glass-card { border-color: rgba(255,255,255,0.12); }
+
+/* Glossy pill button (Analyze button jaisa reference ke "decoardary" button) */
+.glossy-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.glossy-btn::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  border-radius: inherit;
+  z-index: 1;
+  pointer-events: none;
 }

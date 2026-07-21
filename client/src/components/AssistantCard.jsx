@@ -55,7 +55,7 @@ export default function AssistantCard({ userName }) {
   const isEmpty = messages.length === 0;
 
   return (
-    <div className="rounded-3xl bg-white/85 dark:bg-white/[0.06] backdrop-blur-xl shadow-[0_8px_30px_rgba(124,111,240,0.12)] border border-white/60 dark:border-white/10 p-5 flex flex-col flex-1 min-h-[380px]">
+    <div className="glass-card tint-purple rounded-3xl p-5 flex flex-col flex-1 min-h-[380px]">
       {/* Header */}
       <div className="flex items-center gap-2.5 mb-3 shrink-0">
         <span className="h-14 w-14 flex items-center justify-center shrink-0">
