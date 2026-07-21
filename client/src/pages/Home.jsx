@@ -110,20 +110,28 @@ export default function Home({ user, onLogout, dark, setDark }) {
                 />
               </div>
 
-              {/* Floating connector labels */}
-             <div className="hidden md:block absolute left-2 top-[38%] rounded-2xl bg-white/85 backdrop-blur-xl border border-black/[0.06] px-4 py-2.5 shadow-lg text-xs">
-              <div className="text-muted">Oxygen Saturation</div>
-              <div className="text-ink font-semibold">95%</div>
+              {/* ✅ Floating labels – ab position container + glass-card alag */}
+              <div className="hidden md:block absolute left-2 top-[38%]">
+                <div className="glass-card tint-purple rounded-2xl px-4 py-2.5 text-xs w-36">
+                  <div className="relative z-[2] text-muted">Oxygen Saturation</div>
+                  <div className="relative z-[2] text-ink dark:text-white font-semibold">95%</div>
+                </div>
+              </div>
+
+              <div className="hidden md:block absolute right-2 top-[55%]">
+                <div className="glass-card tint-teal rounded-2xl px-4 py-2.5 text-xs w-36">
+                  <div className="relative z-[2] text-muted">Respiratory Rate</div>
+                  <div className="relative z-[2] text-ink dark:text-white font-semibold">12-20/min</div>
+                </div>
+              </div>
+
+              <div className="hidden md:block absolute left-1/2 -translate-x-1/2 bottom-0">
+                <div className="glass-card tint-pink rounded-2xl px-4 py-2.5 text-xs w-36">
+                  <div className="relative z-[2] text-muted">Airway Clarity</div>
+                  <div className="relative z-[2] text-ink dark:text-white font-semibold">Normal</div>
+                </div>
+              </div>
             </div>
-            <div className="hidden md:block absolute right-2 top-[55%] rounded-2xl bg-white/85 backdrop-blur-xl border border-black/[0.06] px-4 py-2.5 shadow-lg text-xs">
-              <div className="text-muted">Respiratory Rate</div>
-              <div className="text-ink font-semibold">12-20/min</div>
-            </div>
-            <div className="hidden md:block absolute left-1/2 -translate-x-1/2 bottom-0 rounded-2xl bg-white/85 backdrop-blur-xl border border-black/[0.06] px-4 py-2.5 shadow-lg text-xs">
-              <div className="text-muted">Airway Clarity</div>
-              <div className="text-ink font-semibold">Normal</div>
-            </div>
-          </div>
 
             {/* RIGHT COLUMN */}
             <div className="hidden md:flex flex-col gap-5 order-3 h-full">
