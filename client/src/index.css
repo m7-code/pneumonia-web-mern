@@ -257,7 +257,7 @@ body {
   background: linear-gradient(140deg, rgba(131, 226, 207, 0.5), rgba(255, 255, 255, 0.35));
 }
 .glass-card.tint-pink {
-  --glow-color: rgba(226, 40, 143, 0.4);
+  --glow-color: rgba(221, 94, 164, 0.4);
   background: linear-gradient(140deg, rgba(231, 161, 201, 0.5), rgba(255, 255, 255, 0.35));
 }
 .glass-card.tint-neutral {
