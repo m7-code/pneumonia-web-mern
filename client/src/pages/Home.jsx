@@ -109,7 +109,7 @@ export default function Home({ user, onLogout, dark, setDark }) {
                 icon={<TargetIcon />}
                 label="AI Detection Confidence"
                 value="94.55%"
-                unit="replace with real score"
+                unit=""
                 tint="purple"
               >
                 <div className="mt-3 h-2 rounded-full bg-black/5 dark:bg-white/10 overflow-hidden">
