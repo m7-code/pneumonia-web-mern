@@ -27,7 +27,7 @@ export default function Home({ user, onLogout, dark, setDark }) {
   const FAB_SIZE = 104; // h-26 w-26 = 104px
   const [btnPos, setBtnPos] = useState(() => {
     if (typeof window !== 'undefined') {
-      return { x: window.innerWidth - FAB_SIZE - 250, y: window.innerHeight - FAB_SIZE -270 };
+      return { x: window.innerWidth - FAB_SIZE - 16, y: window.innerHeight - FAB_SIZE -16 };
     }
     return { x: 0, y: 0 };
   });
