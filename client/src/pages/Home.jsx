@@ -145,24 +145,29 @@ export default function Home({ user, onLogout, dark, setDark }) {
                 </div>
               </StatCard>
 
-              <StatCard
-                icon={<ChartIcon />}
-                label="Weekly Scans Analyzed"
-                value=""
-                unit="connect to your data"
-                tint="teal"
-              >
-                <div className="flex items-end gap-1.5 h-16 mt-3">
-                  {[40, 65, 30, 80, 55, 90, 45].map((h, i) => (
-                    <div key={i} className="flex-1 rounded-t-md bg-primary/70" style={{ height: `${h}%` }} />
-                  ))}
-                </div>
-                <div className="flex justify-between text-[10px] text-muted mt-1">
-                  {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
-                    <span key={d}>{d}</span>
-                  ))}
-                </div>
-              </StatCard>
+             <StatCard
+  icon={<BrainIcon />}
+  label="Powered By"
+  value=""
+  unit=""
+  tint="teal"
+>
+  <div className="flex flex-col gap-2.5 mt-3">
+    {[
+      { icon: <BrainIcon />, text: 'EfficientNet-B2' },
+      { icon: <ScanLineIcon />, text: 'Grad-CAM Explainable AI' },
+      { icon: <BoltIcon />, text: 'Real-time Analysis' },
+      { icon: <LungsIcon />, text: 'ZeroGPU Hosted' },
+    ].map((item, i) => (
+      <div key={i} className="flex items-center gap-2.5 bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2">
+        <div className="h-6 w-6 rounded-full bg-primary/15 text-primary flex items-center justify-center shrink-0">
+          {item.icon}
+        </div>
+        <span className="text-[11px] font-medium text-ink dark:text-white">{item.text}</span>
+      </div>
+    ))}
+  </div>
+</StatCard>
 
               <Link
                 to={user ? '/results' : '/register'}
