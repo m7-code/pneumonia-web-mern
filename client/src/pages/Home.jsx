@@ -4,6 +4,31 @@ import StatCard from '../components/StatCard';
 import AssistantCard from '../components/AssistantCard';
 import { useState, useRef, useEffect } from 'react';
 
+const BrainIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+    <path d="M9 4a3 3 0 0 0-3 3v1a3 3 0 0 0-1 5.5V15a3 3 0 0 0 3 3h1M15 4a3 3 0 0 1 3 3v1a3 3 0 0 1 1 5.5V15a3 3 0 0 1-3 3h-1M9 4v14M15 4v14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+const ScanLineIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+    <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="2" />
+    <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" strokeWidth="2" />
+  </svg>
+);
+
+const LungsIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+    <path d="M12 3v6M12 9c-2 0-4 2-4 6v3a2 2 0 0 1-4 0v-5c0-2 1-4 4-4M12 9c2 0 4 2 4 6v3a2 2 0 0 0 4 0v-5c0-2-1-4-4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+const BoltIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+    <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+  </svg>
+);
+
 const TargetIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
     <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
