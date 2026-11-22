@@ -55,7 +55,10 @@ export default function AssistantCard({ userName }) {
   const isEmpty = messages.length === 0;
 
   return (
-    <div className="glass-card tint-purple rounded-3xl p-5 flex flex-col flex-1 min-h-[380px]">
+    <div
+  className="glass-card tint-purple rounded-3xl p-5 flex flex-col"
+  style={{ height: '560px', flex: 'none' }}
+>
       {/* Header */}
       <div className="flex items-center gap-2.5 mb-3 shrink-0">
         <span className="h-14 w-14 flex items-center justify-center shrink-0">
@@ -77,7 +80,11 @@ export default function AssistantCard({ userName }) {
           </span>
         </div>
       ) : (
-        <div ref={scrollRef} className="flex-1 overflow-y-auto flex flex-col gap-3 pr-1 mb-2">
+        <div
+  ref={scrollRef}
+  className="flex flex-col gap-3 pr-1 mb-2"
+  style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}
+>
           {messages.map((msg, i) => (
             <div
               key={i}
